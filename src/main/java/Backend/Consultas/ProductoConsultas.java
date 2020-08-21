@@ -53,7 +53,7 @@ public class ProductoConsultas {
         try {
             connection=conectar.getConexion();
             
-            preparedStatement = connection.prepareStatement("INSERT INTO PRODUCTO (codigo_Producto, nombre, fabricante, cantidad, precio, codigo_tienda, garantia, descripcion) VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO PRODUCTO (codigo, nombre, fabriacnte, cantidad, precio, codigo_tienda, garantia, descripcion) VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
             preparedStatement.setString(1, producto.getCodigoProducto());
             preparedStatement.setString(2, producto.getNombre());
             preparedStatement.setString(3, producto.getFabricante());
@@ -66,20 +66,20 @@ public class ProductoConsultas {
           
         }   
         catch (SQLIntegrityConstraintViolationException e){
-            return "El nombre de usuario ya se encuentra registrado en el sistema";
+            return "Ya se encuentra registrado en el sistema";
         }
         catch (SQLException ex) {
             return ex.toString();
         }
-        return "Usuario " + producto.getNombre() + " registrado exitosamente";
+        return "Producto Codigo: " + producto.getCodigoProducto()+ " registrado exitosamente";
     }
     
     
-     public String modificarUsuario(Producto producto){
+     public String modificarProducto(Producto producto){
         try {
             
             connection=conectar.getConexion();
-            preparedStatement = connection.prepareStatement("UPDATE Usuario SET nombre=?, fabricante=?, cantidad=?, precio=?, codigo_tienda=?, garantia=?, descripcion=? WHERE codigo_Producto = '"+producto.getCodigoProducto()+"';");
+            preparedStatement = connection.prepareStatement("UPDATE PRODUCTO SET nombre=?, fabriacnte=?, cantidad=?, precio=?, codigo_tienda=?, garantia=?, descripcion=? WHERE codigo = '"+producto.getCodigoProducto()+"';");
             preparedStatement.setString(1, producto.getNombre());
             preparedStatement.setString(2, producto.getFabricante());
             preparedStatement.setInt(3, producto.getCantidad());
@@ -89,9 +89,30 @@ public class ProductoConsultas {
             preparedStatement.setString(7, producto.getDescripcion());
             preparedStatement.executeUpdate();
         }   
+        catch (SQLIntegrityConstraintViolationException e){
+            return "No se encuentra registrado en el sistema";
+        }
         catch (SQLException ex) {
             return ex.toString();
         }
-        return "Usuario " + producto.getNombre() + " modificado exitosamente";
+        return "Producto Codigo: " + producto.getCodigoProducto()+ " modificado exitosamente";
     }
+     
+     public String eliminarProducto(String codigo){
+        try {
+            
+            connection=conectar.getConexion();
+            preparedStatement = connection.prepareStatement("DELETE FROM PRODUCTO WHERE codigo = ? ;");
+            preparedStatement.setString(1, codigo);
+            preparedStatement.executeUpdate();
+        }   
+         catch (SQLIntegrityConstraintViolationException e){
+            return "No se encuentra registrado en el sistema";
+        }
+        catch (SQLException ex) {
+            return ex.toString();
+        }
+        return "Producto Codigo: " +codigo+ " eliminado exitosamente";
+    }
+     
 }
