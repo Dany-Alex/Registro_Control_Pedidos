@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Fronted;
-import Backend.Controlador.Controlador;
+
 /**
  *
  * @author goldtux
@@ -122,7 +122,7 @@ public class Log extends javax.swing.JFrame {
 
     private void empleadoGUIButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadoGUIButtonActionPerformed
       TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
-      Controlador controlador = new Controlador(trabajadorGUI);
+
       trabajadorGUI.setVisible(true);
     }//GEN-LAST:event_empleadoGUIButtonActionPerformed
 
