@@ -93,9 +93,9 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Component id="crearProductoButton" min="-2" pref="83" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="eliminarProductoButton" min="-2" pref="83" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="125" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="seleccionarProductoButton" min="-2" pref="116" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -117,7 +117,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="editarProductoButton" min="-2" pref="83" max="-2" attributes="0"/>
+                              <Component id="eliminarProductoButton" min="-2" pref="83" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="modificarProductoButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="148" max="32767" attributes="0"/>
@@ -159,7 +159,7 @@
                                   <Component id="crearProductoButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="modificarProductoButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="eliminarProductoButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="editarProductoButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="seleccionarProductoButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -314,12 +314,12 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="editarProductoButton">
+            <Component class="javax.swing.JButton" name="seleccionarProductoButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Editar"/>
+                <Property name="text" type="java.lang.String" value="Seleccionar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editarProductoButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="seleccionarProductoButtonActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

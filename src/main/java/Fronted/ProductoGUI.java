@@ -14,13 +14,16 @@ import javax.swing.JOptionPane;
  * @author goldtux
  */
 public class ProductoGUI extends javax.swing.JFrame {
-TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
+
+    TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
+
     /**
      * Creates new form ProductoGUI
      */
     public ProductoGUI() {
         initComponents();
-        
+        eliminarProductoButton.setEnabled(false);
+        modificarProductoButton.setEnabled(false);
         trabajadorGUI.ListarProducto(productosListajTable);
     }
 
@@ -55,7 +58,7 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
         descripcionCrearProductoTextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         tiendaCrearProductoTextField = new javax.swing.JTextField();
-        editarProductoButton = new javax.swing.JButton();
+        seleccionarProductoButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         productosListajTable = new javax.swing.JTable();
@@ -109,10 +112,10 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
 
         jLabel8.setText("Tienda:");
 
-        editarProductoButton.setText("Editar");
-        editarProductoButton.addActionListener(new java.awt.event.ActionListener() {
+        seleccionarProductoButton.setText("Seleccionar");
+        seleccionarProductoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarProductoButtonActionPerformed(evt);
+                seleccionarProductoButtonActionPerformed(evt);
             }
         });
 
@@ -138,9 +141,9 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(crearProductoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(eliminarProductoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 125, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(seleccionarProductoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -157,7 +160,7 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
                             .addComponent(precioCrearProductoTextField)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(editarProductoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(eliminarProductoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(modificarProductoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
@@ -191,7 +194,7 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
                             .addComponent(crearProductoButton)
                             .addComponent(modificarProductoButton)
                             .addComponent(eliminarProductoButton)
-                            .addComponent(editarProductoButton)))
+                            .addComponent(seleccionarProductoButton)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -274,16 +277,28 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearProductoButtonActionPerformed
-        crear(); 
-         trabajadorGUI.ListarProducto(productosListajTable);
-         limpiarTextBox();
+        crear();
+        trabajadorGUI.ListarProducto(productosListajTable);
+        limpiarTextBox();
     }//GEN-LAST:event_crearProductoButtonActionPerformed
 
     private void modificarProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarProductoButtonActionPerformed
-        modificar();
-         trabajadorGUI.ListarProducto(productosListajTable);
-         codigoCrearProductoTextField.setEnabled(true);
-         limpiarTextBox();
+
+        int reply = JOptionPane.showConfirmDialog(null, "Seguro que desea MODIFICAR este registro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            modificar();
+            trabajadorGUI.ListarProducto(productosListajTable);
+            codigoCrearProductoTextField.setEnabled(true);
+            crearProductoButton.setEnabled(true);
+            salirProductoButton.setEnabled(true);
+            limpiarTextBox();
+        } else {
+            codigoCrearProductoTextField.setEnabled(true);
+            crearProductoButton.setEnabled(true);
+            salirProductoButton.setEnabled(true);
+            limpiarTextBox();
+        }
+
     }//GEN-LAST:event_modificarProductoButtonActionPerformed
 
     private void salirProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirProductoButtonActionPerformed
@@ -291,17 +306,37 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
     }//GEN-LAST:event_salirProductoButtonActionPerformed
 
     private void eliminarProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarProductoButtonActionPerformed
-        // TODO add your handling code here:
+
+        int reply = JOptionPane.showConfirmDialog(null, "Seguro que desea ELIMINAR este registro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, productoConsultas.eliminarProducto(codigoCrearProductoTextField.getText()));
+            trabajadorGUI.ListarProducto(productosListajTable);
+            crearProductoButton.setEnabled(true);
+            salirProductoButton.setEnabled(true);
+            codigoCrearProductoTextField.setEnabled(true);
+            limpiarTextBox();
+        } else {
+            codigoCrearProductoTextField.setEnabled(true);
+            crearProductoButton.setEnabled(true);
+            salirProductoButton.setEnabled(true);
+            limpiarTextBox();
+        }
+
     }//GEN-LAST:event_eliminarProductoButtonActionPerformed
 
-    private void editarProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarProductoButtonActionPerformed
-        
-         
+    private void seleccionarProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarProductoButtonActionPerformed
+
+        crearProductoButton.setEnabled(false);
+        salirProductoButton.setEnabled(false);
+
         int fila = productosListajTable.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "Debee Seleccionar Una fila..!!");
         } else {
-             codigoCrearProductoTextField.setEnabled(false);
+            eliminarProductoButton.setEnabled(true);
+            modificarProductoButton.setEnabled(true);
+
+            codigoCrearProductoTextField.setEnabled(false);
             String codigo = (String) productosListajTable.getValueAt(fila, 0);
             String nombre = (String) productosListajTable.getValueAt(fila, 1);
             String fabricante = (String) productosListajTable.getValueAt(fila, 2);
@@ -310,7 +345,7 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
             String codigoTienda = (String) productosListajTable.getValueAt(fila, 5);
             int garantia = Integer.parseInt((String) productosListajTable.getValueAt(fila, 6).toString());
             String descripcion = (String) productosListajTable.getValueAt(fila, 7);
-            
+
             codigoCrearProductoTextField.setText(codigo);
             nombreCrearProductoTextField.setText(nombre);
             fabricanteCrearProductoTextField.setText(fabricante);
@@ -319,37 +354,45 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
             tiendaCrearProductoTextField.setText(codigoTienda);
             garantiaCrearProductoTextField.setText("" + garantia);
             descripcionCrearProductoTextField.setText(descripcion);
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_editarProductoButtonActionPerformed
-    ProductoConsultas productoConsultas =new ProductoConsultas();
-    Producto producto =new Producto();
-    
+        }
+    }//GEN-LAST:event_seleccionarProductoButtonActionPerformed
+    ProductoConsultas productoConsultas = new ProductoConsultas();
+    Producto producto = new Producto();
+
     public void crear() {
-        
-        String codigo = codigoCrearProductoTextField.getText();
-        String nombre = nombreCrearProductoTextField.getText();
-        String fabricante = fabricanteCrearProductoTextField.getText();
-        int cantidad = Integer.parseInt(cantidadCrearProductoTextField.getText());
-        double precio = Double.parseDouble(precioCrearProductoTextField.getText());
-        String codigoTienda = tiendaCrearProductoTextField.getText();
-        int garantia = Integer.parseInt(garantiaCrearProductoTextField.getText());
-        String descripcion = descripcionCrearProductoTextField.getText();
-        
-        producto.setCodigoProducto(codigo);
-        producto.setNombre(nombre);
-        producto.setFabricante(fabricante);
-        producto.setCantidad(cantidad);
-        producto.setPrecio(precio);
-        producto.setTienda(codigoTienda);
-        producto.setGarantia(garantia);
-        producto.setDescripcion(descripcion);
-        
-        JOptionPane.showMessageDialog(this,productoConsultas.crearProducto(producto) );
-        
+
+        int reply = JOptionPane.showConfirmDialog(null, "Los datos de cada campo son correctos?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+
+        if (reply == JOptionPane.YES_OPTION) {
+            String codigo = codigoCrearProductoTextField.getText();
+            String nombre = nombreCrearProductoTextField.getText();
+            String fabricante = fabricanteCrearProductoTextField.getText();
+            int cantidad = Integer.parseInt(cantidadCrearProductoTextField.getText());
+            double precio = Double.parseDouble(precioCrearProductoTextField.getText());
+            String codigoTienda = tiendaCrearProductoTextField.getText();
+            int garantia = Integer.parseInt(garantiaCrearProductoTextField.getText());
+            String descripcion = descripcionCrearProductoTextField.getText();
+
+            producto.setCodigoProducto(codigo);
+            producto.setNombre(nombre);
+            producto.setFabricante(fabricante);
+            producto.setCantidad(cantidad);
+            producto.setPrecio(precio);
+            producto.setTienda(codigoTienda);
+            producto.setGarantia(garantia);
+            producto.setDescripcion(descripcion);
+
+            JOptionPane.showMessageDialog(this, productoConsultas.crearProducto(producto));
+            limpiarTextBox();
+
+        } else {
+
+        }
+
     }
-    
+
     public void modificar() {
-        
+
         String codigo = codigoCrearProductoTextField.getText();
         String nombre = nombreCrearProductoTextField.getText();
         String fabricante = fabricanteCrearProductoTextField.getText();
@@ -358,7 +401,7 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
         String codigoTienda = tiendaCrearProductoTextField.getText();
         int garantia = Integer.parseInt(garantiaCrearProductoTextField.getText());
         String descripcion = descripcionCrearProductoTextField.getText();
-        
+
         producto.setCodigoProducto(codigo);
         producto.setNombre(nombre);
         producto.setFabricante(fabricante);
@@ -367,19 +410,20 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
         producto.setTienda(codigoTienda);
         producto.setGarantia(garantia);
         producto.setDescripcion(descripcion);
-        
-        JOptionPane.showMessageDialog(this,productoConsultas.modificarProducto(producto) );
-        
+
+        JOptionPane.showMessageDialog(this, productoConsultas.modificarProducto(producto));
+
     }
-    public void limpiarTextBox(){
-    codigoCrearProductoTextField.setText("");
-            nombreCrearProductoTextField.setText("");
-            fabricanteCrearProductoTextField.setText("");
-            cantidadCrearProductoTextField.setText("");
-            precioCrearProductoTextField.setText("" );
-            tiendaCrearProductoTextField.setText("");
-            garantiaCrearProductoTextField.setText("");
-            descripcionCrearProductoTextField.setText("");
+
+    public void limpiarTextBox() {
+        codigoCrearProductoTextField.setText("");
+        nombreCrearProductoTextField.setText("");
+        fabricanteCrearProductoTextField.setText("");
+        cantidadCrearProductoTextField.setText("");
+        precioCrearProductoTextField.setText("");
+        tiendaCrearProductoTextField.setText("");
+        garantiaCrearProductoTextField.setText("");
+        descripcionCrearProductoTextField.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -387,7 +431,6 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
     public javax.swing.JTextField codigoCrearProductoTextField;
     public javax.swing.JButton crearProductoButton;
     public javax.swing.JTextField descripcionCrearProductoTextField;
-    public javax.swing.JButton editarProductoButton;
     public javax.swing.JButton eliminarProductoButton;
     public javax.swing.JTextField fabricanteCrearProductoTextField;
     public javax.swing.JTextField garantiaCrearProductoTextField;
@@ -408,6 +451,7 @@ TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
     public javax.swing.JTextField precioCrearProductoTextField;
     public javax.swing.JTable productosListajTable;
     public javax.swing.JButton salirProductoButton;
+    public javax.swing.JButton seleccionarProductoButton;
     public javax.swing.JTextField tiendaCrearProductoTextField;
     // End of variables declaration//GEN-END:variables
 }
