@@ -5,17 +5,23 @@
  */
 package Fronted;
 
+import Backend.Consultas.ProductoConsultas;
+import Backend.Producto;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author goldtux
  */
 public class ProductoGUI extends javax.swing.JFrame {
-
+TrabajadorGUI trabajadorGUI = new TrabajadorGUI();
     /**
      * Creates new form ProductoGUI
      */
     public ProductoGUI() {
         initComponents();
+        
+        trabajadorGUI.ListarProducto(productosListajTable);
     }
 
     /**
@@ -29,10 +35,10 @@ public class ProductoGUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        crearProductoButton = new javax.swing.JButton();
+        modificarProductoButton = new javax.swing.JButton();
+        salirProductoButton = new javax.swing.JButton();
+        eliminarProductoButton = new javax.swing.JButton();
         codigoCrearProductoTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         nombreCrearProductoTextField = new javax.swing.JTextField();
@@ -49,39 +55,41 @@ public class ProductoGUI extends javax.swing.JFrame {
         descripcionCrearProductoTextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         tiendaCrearProductoTextField = new javax.swing.JTextField();
+        editarProductoButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        productosListajTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Producto");
 
         jPanel1.setBackground(new java.awt.Color(255, 102, 0));
 
-        jButton1.setText("Crear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        crearProductoButton.setText("Crear");
+        crearProductoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                crearProductoButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        modificarProductoButton.setText("Modificar");
+        modificarProductoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                modificarProductoButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        salirProductoButton.setText("Salir");
+        salirProductoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                salirProductoButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Eliminar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        eliminarProductoButton.setText("Eliminar");
+        eliminarProductoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                eliminarProductoButtonActionPerformed(evt);
             }
         });
 
@@ -101,6 +109,13 @@ public class ProductoGUI extends javax.swing.JFrame {
 
         jLabel8.setText("Tienda:");
 
+        editarProductoButton.setText("Editar");
+        editarProductoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarProductoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -116,11 +131,19 @@ public class ProductoGUI extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fabricanteCrearProductoTextField)
+                            .addComponent(fabricanteCrearProductoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                             .addComponent(nombreCrearProductoTextField)
                             .addComponent(codigoCrearProductoTextField)
-                            .addComponent(cantidadCrearProductoTextField))
-                        .addGap(18, 18, 18)
+                            .addComponent(cantidadCrearProductoTextField)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(crearProductoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(eliminarProductoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 125, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
@@ -132,15 +155,13 @@ public class ProductoGUI extends javax.swing.JFrame {
                             .addComponent(garantiaCrearProductoTextField)
                             .addComponent(tiendaCrearProductoTextField)
                             .addComponent(precioCrearProductoTextField)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(editarProductoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarProductoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                        .addComponent(salirProductoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
         );
         jPanel2Layout.setVerticalGroup(
@@ -166,10 +187,11 @@ public class ProductoGUI extends javax.swing.JFrame {
                             .addComponent(descripcionCrearProductoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton4)))
+                            .addComponent(salirProductoButton)
+                            .addComponent(crearProductoButton)
+                            .addComponent(modificarProductoButton)
+                            .addComponent(eliminarProductoButton)
+                            .addComponent(editarProductoButton)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -189,7 +211,7 @@ public class ProductoGUI extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        productosListajTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -197,7 +219,7 @@ public class ProductoGUI extends javax.swing.JFrame {
                 "Codigo", "Nombre", "Fabricante", "Cantidad", "Precio", "Tienda", "Garantia", "Descripcion"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(productosListajTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -225,7 +247,7 @@ public class ProductoGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,67 +273,124 @@ public class ProductoGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void crearProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearProductoButtonActionPerformed
+        crear(); 
+         trabajadorGUI.ListarProducto(productosListajTable);
+         limpiarTextBox();
+    }//GEN-LAST:event_crearProductoButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void modificarProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarProductoButtonActionPerformed
+        modificar();
+         trabajadorGUI.ListarProducto(productosListajTable);
+         codigoCrearProductoTextField.setEnabled(true);
+         limpiarTextBox();
+    }//GEN-LAST:event_modificarProductoButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void salirProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirProductoButtonActionPerformed
         this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_salirProductoButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void eliminarProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarProductoButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_eliminarProductoButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProductoGUI().setVisible(true);
-            }
-        });
+    private void editarProductoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarProductoButtonActionPerformed
+        
+         
+        int fila = productosListajTable.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Debee Seleccionar Una fila..!!");
+        } else {
+             codigoCrearProductoTextField.setEnabled(false);
+            String codigo = (String) productosListajTable.getValueAt(fila, 0);
+            String nombre = (String) productosListajTable.getValueAt(fila, 1);
+            String fabricante = (String) productosListajTable.getValueAt(fila, 2);
+            int cantidad = Integer.parseInt((String) productosListajTable.getValueAt(fila, 3).toString());
+            double precio = Double.parseDouble((String) productosListajTable.getValueAt(fila, 4).toString());
+            String codigoTienda = (String) productosListajTable.getValueAt(fila, 5);
+            int garantia = Integer.parseInt((String) productosListajTable.getValueAt(fila, 6).toString());
+            String descripcion = (String) productosListajTable.getValueAt(fila, 7);
+            
+            codigoCrearProductoTextField.setText(codigo);
+            nombreCrearProductoTextField.setText(nombre);
+            fabricanteCrearProductoTextField.setText(fabricante);
+            cantidadCrearProductoTextField.setText("" + cantidad);
+            precioCrearProductoTextField.setText("" + precio);
+            tiendaCrearProductoTextField.setText(codigoTienda);
+            garantiaCrearProductoTextField.setText("" + garantia);
+            descripcionCrearProductoTextField.setText(descripcion);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_editarProductoButtonActionPerformed
+    ProductoConsultas productoConsultas =new ProductoConsultas();
+    Producto producto =new Producto();
+    
+    public void crear() {
+        
+        String codigo = codigoCrearProductoTextField.getText();
+        String nombre = nombreCrearProductoTextField.getText();
+        String fabricante = fabricanteCrearProductoTextField.getText();
+        int cantidad = Integer.parseInt(cantidadCrearProductoTextField.getText());
+        double precio = Double.parseDouble(precioCrearProductoTextField.getText());
+        String codigoTienda = tiendaCrearProductoTextField.getText();
+        int garantia = Integer.parseInt(garantiaCrearProductoTextField.getText());
+        String descripcion = descripcionCrearProductoTextField.getText();
+        
+        producto.setCodigoProducto(codigo);
+        producto.setNombre(nombre);
+        producto.setFabricante(fabricante);
+        producto.setCantidad(cantidad);
+        producto.setPrecio(precio);
+        producto.setTienda(codigoTienda);
+        producto.setGarantia(garantia);
+        producto.setDescripcion(descripcion);
+        
+        JOptionPane.showMessageDialog(this,productoConsultas.crearProducto(producto) );
+        
+    }
+    
+    public void modificar() {
+        
+        String codigo = codigoCrearProductoTextField.getText();
+        String nombre = nombreCrearProductoTextField.getText();
+        String fabricante = fabricanteCrearProductoTextField.getText();
+        int cantidad = Integer.parseInt(cantidadCrearProductoTextField.getText());
+        double precio = Double.parseDouble(precioCrearProductoTextField.getText());
+        String codigoTienda = tiendaCrearProductoTextField.getText();
+        int garantia = Integer.parseInt(garantiaCrearProductoTextField.getText());
+        String descripcion = descripcionCrearProductoTextField.getText();
+        
+        producto.setCodigoProducto(codigo);
+        producto.setNombre(nombre);
+        producto.setFabricante(fabricante);
+        producto.setCantidad(cantidad);
+        producto.setPrecio(precio);
+        producto.setTienda(codigoTienda);
+        producto.setGarantia(garantia);
+        producto.setDescripcion(descripcion);
+        
+        JOptionPane.showMessageDialog(this,productoConsultas.modificarProducto(producto) );
+        
+    }
+    public void limpiarTextBox(){
+    codigoCrearProductoTextField.setText("");
+            nombreCrearProductoTextField.setText("");
+            fabricanteCrearProductoTextField.setText("");
+            cantidadCrearProductoTextField.setText("");
+            precioCrearProductoTextField.setText("" );
+            tiendaCrearProductoTextField.setText("");
+            garantiaCrearProductoTextField.setText("");
+            descripcionCrearProductoTextField.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cantidadCrearProductoTextField;
-    private javax.swing.JTextField codigoCrearProductoTextField;
-    private javax.swing.JTextField descripcionCrearProductoTextField;
-    private javax.swing.JTextField fabricanteCrearProductoTextField;
-    private javax.swing.JTextField garantiaCrearProductoTextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    public javax.swing.JTextField cantidadCrearProductoTextField;
+    public javax.swing.JTextField codigoCrearProductoTextField;
+    public javax.swing.JButton crearProductoButton;
+    public javax.swing.JTextField descripcionCrearProductoTextField;
+    public javax.swing.JButton editarProductoButton;
+    public javax.swing.JButton eliminarProductoButton;
+    public javax.swing.JTextField fabricanteCrearProductoTextField;
+    public javax.swing.JTextField garantiaCrearProductoTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -324,9 +403,11 @@ public class ProductoGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField nombreCrearProductoTextField;
-    private javax.swing.JTextField precioCrearProductoTextField;
-    private javax.swing.JTextField tiendaCrearProductoTextField;
+    public javax.swing.JButton modificarProductoButton;
+    public javax.swing.JTextField nombreCrearProductoTextField;
+    public javax.swing.JTextField precioCrearProductoTextField;
+    public javax.swing.JTable productosListajTable;
+    public javax.swing.JButton salirProductoButton;
+    public javax.swing.JTextField tiendaCrearProductoTextField;
     // End of variables declaration//GEN-END:variables
 }
