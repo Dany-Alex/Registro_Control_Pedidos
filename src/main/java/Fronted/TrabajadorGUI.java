@@ -5,6 +5,13 @@
  */
 package Fronted;
 
+import Backend.Consultas.ProductoConsultas;
+
+import Backend.Producto;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author goldtux
@@ -49,9 +56,9 @@ public class TrabajadorGUI extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        nuevoProductoMenuItem = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
@@ -101,7 +108,7 @@ public class TrabajadorGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Tienda:");
 
-        listarProducto.setText("Ver");
+        listarProducto.setText("Actualizar Tabla");
         listarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listarProductoActionPerformed(evt);
@@ -138,39 +145,27 @@ public class TrabajadorGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
                         .addComponent(listarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                    .addContainerGap(878, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(158, 158, 158)))
+                        .addGap(17, 17, 17))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(28, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(listarProducto)
-                        .addGap(20, 20, 20))))
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                    .addContainerGap(50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2)
-                    .addGap(18, 18, 18)))
+                    .addComponent(listarProducto))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -251,8 +246,9 @@ public class TrabajadorGUI extends javax.swing.JFrame {
         jTabbedPane1.addTab("Nuevo ingreso ", jPanel7);
 
         jMenu1.setText("Archivo");
+        jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Nuevo");
+        jMenu2.setText("Administrar");
 
         jMenuItem5.setText("Cliente");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -260,15 +256,15 @@ public class TrabajadorGUI extends javax.swing.JFrame {
                 jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem5);
+        jMenu2.add(jMenuItem5);
 
-        jMenuItem6.setText("Producto");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        nuevoProductoMenuItem.setText("Producto");
+        nuevoProductoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                nuevoProductoMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem6);
+        jMenu2.add(nuevoProductoMenuItem);
 
         jMenuItem7.setText("Tienda");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -276,7 +272,7 @@ public class TrabajadorGUI extends javax.swing.JFrame {
                 jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        jMenu2.add(jMenuItem7);
 
         jMenuItem9.setText("Tiempo");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +280,7 @@ public class TrabajadorGUI extends javax.swing.JFrame {
                 jMenuItem9ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem9);
+        jMenu2.add(jMenuItem9);
 
         jMenuItem10.setText("Empleado");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
@@ -292,11 +288,9 @@ public class TrabajadorGUI extends javax.swing.JFrame {
                 jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem10);
+        jMenu2.add(jMenuItem10);
 
-        jMenu1.add(jMenu3);
-
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -324,10 +318,11 @@ public class TrabajadorGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void nuevoProductoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoProductoMenuItemActionPerformed
        ProductoGUI productoGUI = new ProductoGUI();
-       productoGUI.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+             
+      productoGUI.setVisible(true);
+    }//GEN-LAST:event_nuevoProductoMenuItemActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
@@ -342,13 +337,49 @@ public class TrabajadorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void listarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProductoActionPerformed
-        // TODO add your handling code here:
+        ListarProducto(jTablaProdutos);        // TODO add your handling code here:
     }//GEN-LAST:event_listarProductoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+   
+    ProductoConsultas productoConsultas= new ProductoConsultas();
+    Producto producto = new Producto();
+      
+    
+    DefaultTableModel tableModel = new DefaultTableModel();
 
+    public void ListarProducto(JTable tablaProductos){
+        limpiarTabla(tablaProductos);
+        
+    tableModel=(DefaultTableModel)tablaProductos.getModel();
+    
+    List <Producto> listaProductos=productoConsultas.Listar();
+    Object[] object = new Object[8];
+        
+        for (int i = 0; i < listaProductos.size(); i++) {
+            object[0]=listaProductos.get(i).getCodigoProducto();
+            object[1]=listaProductos.get(i).getNombre();
+            object[2]=listaProductos.get(i).getFabricante();
+            object[3]=listaProductos.get(i).getCantidad();
+            object[4]=listaProductos.get(i).getPrecio();
+            object[5]=listaProductos.get(i).getTienda();
+            object[6]=listaProductos.get(i).getGarantia();
+            object[7]=listaProductos.get(i).getDescripcion();
+            tableModel.addRow(object);
+           
+        } 
+        jTablaProdutos.setModel(tableModel);
+    
+    }
+    public void limpiarTabla(JTable Jtable){
+        DefaultTableModel tb = (DefaultTableModel) Jtable.getModel();
+        int a = Jtable.getRowCount()-1;
+        for (int i = a; i >= 0; i--) {          
+        tb.removeRow(tb.getRowCount()-1);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -359,13 +390,12 @@ public class TrabajadorGUI extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel3;
     public javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem9;
+    public javax.swing.JMenuItem jMenuItem10;
+    public javax.swing.JMenuItem jMenuItem5;
+    public javax.swing.JMenuItem jMenuItem7;
+    public javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -380,5 +410,6 @@ public class TrabajadorGUI extends javax.swing.JFrame {
     public javax.swing.JTextField jTextField2;
     public javax.swing.JTextField jTextField3;
     public javax.swing.JButton listarProducto;
+    public javax.swing.JMenuItem nuevoProductoMenuItem;
     // End of variables declaration//GEN-END:variables
 }
